@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.widget.Toast;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -60,7 +58,8 @@ public class CallLogChangeObserverClass extends ContentObserver
             for(int i = 2; i < c.getColumnCount(); i++) {
                 String number = c.getString(i);
                 if(number != null && number.length() > 0) {
-                    number = number.substring(number.length()-7);
+                    if(number.length() > 7)
+                        number = number.substring(number.length()-7);
                     String name = nameLookupQuery(number);
                     //Toast.makeText(ctx.getApplicationContext(), number + " : " + name, Toast.LENGTH_LONG).show();
                     if(name != null && name.length() > 0) {

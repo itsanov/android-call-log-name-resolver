@@ -1,17 +1,11 @@
 package com.itbg.calllogresolver;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Service;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.provider.CallLog;
-import android.widget.Toast;
 
 public class CallLogService extends Service {
 
@@ -31,7 +25,8 @@ public class CallLogService extends Service {
         getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true,
                 callLogChangeEvents);
 
-        return START_STICKY;
+        //return START_STICKY;
+        return super.onStartCommand(intent, flags, startid);
     }
 
     @Override
